@@ -168,6 +168,7 @@ resources:
       network: {get_resource: fixed_network}
       dns_nameservers:
         - {get_param: dns_nameserver}
+        - 8.8.8.8
 
   extrouter:
     type: OS::Neutron::Router
@@ -336,7 +337,8 @@ resources:
     depends_on:
       - extrouter_inside
     properties:
-      image: {get_param: server_image}
+### Commented out by Loxxly
+#image: {get_param: server_image}
       flavor: {get_param: master_flavor}
       key_name: {get_param: ssh_key_name}
       user_data_format: RAW
@@ -345,7 +347,15 @@ resources:
         - port: {get_resource: kube_master_eth0}
       name:
         list_join: [-, [{get_param: "OS::stack_name"}, master]]
-
+      #################################
+      # Added by Loxxly
+      block_device_mapping_v2:
+        - boot_index: 0
+          delete_on_termination: true
+          device_name: vda
+          device_type: disk
+          image: {get_param: server_image}
+          volume_size: 50
   kube_master_eth0:
     type: OS::Neutron::Port
     properties:

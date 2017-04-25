@@ -28,8 +28,8 @@ if ! which flanneld >/dev/null 2>&1; then
 fi
 
 cat <<EOF >/etc/sysconfig/flanneld
-FLANNEL_ETCD="${FLANNEL_ETCD_URL}"
-FLANNEL_ETCD_KEY="/coreos.com/network"
+FLANNEL_ETCD_ENDPOINTS="${FLANNEL_ETCD_URL}"
+FLANNEL_ETCD_PREFIX="/coreos.com/network"
 FLANNEL_OPTIONS="-iface=eth0 --ip-masq"
 EOF
 

@@ -57,7 +57,7 @@ EOF
 etcdctl -C ${FLANNEL_ETCD_URL} set /coreos.com/network/config < /etc/flannel-config.json
 
 cat <<EOF > /etc/sysconfig/flanneld
-FLANNEL_ETCD="${FLANNEL_ETCD_URL}"
+FLANNEL_ETCD_ENDPOINTS="${FLANNEL_ETCD_URL}"
 FLANNEL_ETCD_KEY="/coreos.com/network"
 FLANNEL_OPTIONS="-iface=eth0 --ip-masq"
 EOF

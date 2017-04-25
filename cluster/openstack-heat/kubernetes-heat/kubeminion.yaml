@@ -252,7 +252,8 @@ resources:
   kube_minion:
     type: OS::Nova::Server
     properties:
-      image: {get_param: server_image}
+### Commented out by Loxxly
+#      image: {get_param: server_image}
       flavor: {get_param: minion_flavor}
       key_name: {get_param: ssh_key_name}
       metadata: {get_param: metadata}
@@ -262,7 +263,16 @@ resources:
         - port: {get_resource: kube_minion_eth0}
       name:
         list_join: [-, [{get_param: cluster_name}, node, {get_resource: server_name_post_fix}]]
-
+      #################################
+      # Added by Loxxly
+      block_device_mapping_v2:
+        - boot_index: 0
+          delete_on_termination: true
+          device_name: vda
+          device_type: disk
+          image: {get_param: server_image}
+          volume_size: 50
+            
   kube_minion_eth0:
     type: OS::Neutron::Port
     properties:
