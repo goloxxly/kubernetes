@@ -69,3 +69,10 @@ SOCKS_PROXY=${SOCKS_PROXY:-}
 
 # IPs and Domains that bypass the proxy.
 NO_PROXY=${NO_PROXY:-}
+
+
+# Optional: Cluster monitoring to setup as part of the cluster bring up:
+#   none     - No cluster monitoring setup
+#   influxdb - Heapster, InfluxDB, and Grafana
+ENABLE_CLUSTER_MONITORING="${KUBE_ENABLE_CLUSTER_MONITORING:-none}"
+

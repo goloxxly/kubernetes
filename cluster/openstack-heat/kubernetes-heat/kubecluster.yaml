@@ -35,7 +35,7 @@ parameters:
   dns_nameserver:
     type: string
     description: address of a dns nameserver reachable in your environment
-    default: 8.8.8.8
+#    default: 8.8.8.8
 
   number_of_minions:
     type: number
