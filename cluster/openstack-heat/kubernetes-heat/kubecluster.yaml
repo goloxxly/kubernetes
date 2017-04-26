@@ -37,6 +37,11 @@ parameters:
     description: address of a dns nameserver reachable in your environment
 #    default: 8.8.8.8
 
+   enable_cluster_monitoring: 
+     type: string 
+     description: Cluster monitoring to setup as part of the cluster bring up. Possible values are none and influxdb 
+     default: none 
+
   number_of_minions:
     type: number
     description: how many kubernetes minions to spawn initially
@@ -302,6 +307,7 @@ resources:
             "$SUBNET_ID": {get_resource: fixed_subnet}
             "$FLOATING_NETWORK_ID": {get_attr: [kube_master_floating, floating_network_id]}
             "$role": "kubernetes-master"
+            "$ENABLE_CLUSTER_MONITORING": {get_param: enable_cluster_monitoring} 
 
   run_salt:
     type: OS::Heat::SoftwareConfig
